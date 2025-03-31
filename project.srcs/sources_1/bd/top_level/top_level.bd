@@ -1,0 +1,126 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x14D00DAA88F5368C",
+      "device": "xcu55c-fsvh2892-2L-e",
+      "gen_directory": "../../../../project.gen/sources_1/bd/top_level",
+      "name": "top_level",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2021.1",
+      "validated": "true"
+    },
+    "design_tree": {
+      "blinky": "",
+      "clock_buffer": "",
+      "system_ila": ""
+    },
+    "interface_ports": {
+      "SYSCLK2": {
+        "mode": "Slave",
+        "vlnv_bus_definition": "xilinx.com:interface:diff_clock:1.0",
+        "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0",
+        "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          }
+        }
+      }
+    },
+    "ports": {
+      "QSFP28_0_ACTIVITY_LED": {
+        "direction": "O"
+      },
+      "HBM_CATTRIP_LS": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "blinky": {
+        "vlnv": "xilinx.com:module_ref:blinky:1.0",
+        "xci_name": "top_level_blinky_0_0",
+        "xci_path": "ip/top_level_blinky_0_0/top_level_blinky_0_0.xci",
+        "inst_hier_path": "blinky",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "blinky",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "top_level_util_ds_buf_1_0_IBUF_OUT",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "cattrip": {
+            "direction": "O"
+          },
+          "led": {
+            "direction": "O"
+          }
+        }
+      },
+      "clock_buffer": {
+        "vlnv": "xilinx.com:ip:util_ds_buf:2.2",
+        "xci_name": "top_level_util_ds_buf_1_0",
+        "xci_path": "ip/top_level_util_ds_buf_1_0/top_level_util_ds_buf_1_0.xci",
+        "inst_hier_path": "clock_buffer"
+      },
+      "system_ila": {
+        "vlnv": "xilinx.com:ip:system_ila:1.1",
+        "xci_name": "top_level_system_ila_0_0",
+        "xci_path": "ip/top_level_system_ila_0_0/top_level_system_ila_0_0.xci",
+        "inst_hier_path": "system_ila",
+        "parameters": {
+          "C_MON_TYPE": {
+            "value": "NATIVE"
+          }
+        }
+      }
+    },
+    "interface_nets": {
+      "SYSCLK2_1": {
+        "interface_ports": [
+          "SYSCLK2",
+          "clock_buffer/CLK_IN_D"
+        ]
+      }
+    },
+    "nets": {
+      "blinky_cattrip": {
+        "ports": [
+          "blinky/cattrip",
+          "HBM_CATTRIP_LS"
+        ]
+      },
+      "blinky_led": {
+        "ports": [
+          "blinky/led",
+          "QSFP28_0_ACTIVITY_LED",
+          "system_ila/probe0"
+        ]
+      },
+      "util_ds_buf_1_IBUF_OUT": {
+        "ports": [
+          "clock_buffer/IBUF_OUT",
+          "blinky/clk",
+          "system_ila/clk"
+        ]
+      }
+    }
+  }
+}
